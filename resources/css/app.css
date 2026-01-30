@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Fontes: Instrument Sans para corpo e Playfair para títulos elegantes */
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif-title: 'Playfair Display', serif;
+
+    /* Cores de Marca: Ajustadas para contraste WCAG AA */
+    --color-brand-bg: #fcfbf8;
+    --color-brand-dark: #1b1b1b;
+    --color-brand-gold: #c68e28; /* Adicionado para consistência */
+
+    /* Sistema de Acentuação (Flux) */
+    --color-accent: var(--color-zinc-800);
+    --color-accent-content: var(--color-white);
+    --color-accent-foreground: var(--color-zinc-800);
+
+    /* Animações reduzidas (Acessibilidade para quem tem vestibulopatia) */
+    --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-zinc-100);
+        --color-accent-content: var(--color-zinc-900);
+        --color-accent-foreground: var(--color-zinc-100);
+        --color-brand-bg: #121212;
+        --color-brand-dark: #fcfbf8;
+    }
+}
+
+@layer base {
+    *, ::after, ::before, ::backdrop, {
+        border-color: var(--color-zinc-200);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    body {
+        @apply bg-brand-bg text-brand-dark antialiased selection:bg-[#c68e28]/20;
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+        text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3, h4 {
+        @apply font-serif-title tracking-tight leading-tight;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-brand-gold;
+    }
+}
+
+/* --- CORREÇÃO DE VISIBILIDADE: LOGIN E REGISTRO --- */
+
+/* --- CORREÇÃO FINAL E AGRESSIVA PARA O BOTÃO --- */
+
+/* Alvos: Botão primário do Flux e botões de submit */
+ui-button[variant="primary"],
+button[type="submit"],
+.flux-button-primary {
+    /* Força o fundo escuro da sua marca */
+    background-color: var(--color-brand-dark) !important;
+    /* Força o texto em branco puro */
+    color: #ffffff !important;
+    /* Garante que o texto não tenha transparência */
+    opacity: 1 !important;
+    /* Melhora o peso da fonte para leitura */
+    font-weight: 600 !important;
+    position: relative;
+}
+
+/* O Flux muitas vezes coloca o texto dentro de um span ou slot, 
+   precisamos garantir que esse elemento interno também herde o branco */
+ui-button[variant="primary"] *,
+button[type="submit"] * {
+    opacity: 1 !important;
+}
+
+/* Ajuste do link Registrar (que estava invisível por ser branco no fundo claro) */
+a[href*="register"], 
+.flux-link {
+    color: var(--color-brand-gold) !important;
+    opacity: 1 !important;
+    text-decoration: underline !important;
+    font-weight: 600 !important;
+}
+
+
+/* 3. Ajuste do Checkbox "Remember me" e sua label */
+[data-flux-checkbox] + label,
+[data-flux-label] {
+    opacity: 100% !important;
+    color: var(--color-brand-dark) !important;
+    font-weight: var(--font-weight-medium);
+}
+
+/* 4. Estilo do Checkbox quando marcado (Opcional - Dourado) */
+input[type="checkbox"]:checked {
+    background-color: var(--color-brand-gold) !important;
+    border-color: var(--color-brand-gold) !important;
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-1.5;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !text-sm font-medium opacity-90;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-brand-gold/50 border-brand-gold;
+}
+
+/* Utilidades */
+@utility font-serif-title {
+    font-family: var(--font-serif-title);
+}
+
+@utility bg-mesh-subtle {
+    background-image: radial-gradient(at 0% 0%, hsla(38, 30%, 96%, 1) 0, transparent 50%),
+                      radial-gradient(at 100% 100%, hsla(38, 20%, 94%, 1) 0, transparent 50%);
+}
