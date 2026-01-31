@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\LibeloForm;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -21,4 +22,8 @@ Volt::route('/grupos', 'pages.grupos')->name('grupos');
 Volt::route('/faq', 'pages.faq')->name('faq');
 Volt::route('/glossario', 'pages.glossario')->name('glossario');
 
-require __DIR__.'/settings.php';
+Route::middleware(['auth'])->group(function () {
+    Route::get('/formulario-libelo', LibeloForm::class)->name('libelo.form');
+});
+
+require __DIR__ . '/settings.php';

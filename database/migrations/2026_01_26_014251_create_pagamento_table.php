@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment', function (Blueprint $table) {
+        Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('pix_transaction_id')->unique(); // ID gerado pelo banco
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');;
+            $table->string('pix_transaction_id')->unique();
             $table->decimal('amount');
             $table->timestamps();
             $table->softdeletes();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment');
+        Schema::dropIfExists('pagamentos');
     }
 };

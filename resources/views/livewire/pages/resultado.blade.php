@@ -66,14 +66,13 @@ new #[Layout('layouts.public')] class extends Component {
 
             {{-- CTAs (Chamadas para Ação) --}}
             <div class="grid gap-4 sm:flex sm:justify-center">
-                <a href="/gerar-libelo" wire:navigate
-                    class="flex items-center justify-center gap-3 px-8 py-4 bg-[#c68e28] text-brand-dark rounded-2xl font-bold text-lg hover:bg-[#b37f24] transition-all shadow-lg">
+
+                <flux:button href="{{ route('libelo.form') }}" variant="primary">
                     Iniciar Meu Libelo
-                </a>
-                <a href="{{ route('viabilidade') }}" wire:navigate
-                    class="flex items-center justify-center px-8 py-4 bg-zinc-100 text-zinc-600 rounded-2xl font-bold text-lg hover:bg-zinc-200 transition-all">
-                    Refazer Teste
-                </a>
+                </flux:button>
+                <flux:button href="{{ route('viabilidade') }}" variant="primary">
+                    Refazer Meu Teste
+                </flux:button>
             </div>
 
             <div class="mt-16 pt-8 border-t border-zinc-100">

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('canon', function (Blueprint $table) {
             $table->id();
             $table->string('canon'); // Ex: CIC 1095, §2
-            $table->string('category'); // Ex: Discernimento / Idade Mínima
-            $table->text('question'); // A pergunta para o usuário
-            $table->text('explanation')->nullable(); // Explicação técnica do Cânon
+            $table->string('categoria'); // Ex: Discernimento / Idade Mínima
+            $table->text('pergunta'); // A pergunta para o usuário
+            $table->text('explicacao')->nullable(); // Explicação técnica do Cânon
             $table->timestamps();
             $table->softDeletes();
         });

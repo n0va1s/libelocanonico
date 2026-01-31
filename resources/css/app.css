@@ -9,21 +9,21 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    /* Fontes: Instrument Sans para corpo e Playfair para títulos elegantes */
+    /* Fontes */
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-serif-title: 'Playfair Display', serif;
 
-    /* Cores de Marca: Ajustadas para contraste WCAG AA */
+    /* Cores de Marca */
     --color-brand-bg: #fcfbf8;
     --color-brand-dark: #1b1b1b;
-    --color-brand-gold: #c68e28; /* Adicionado para consistência */
+    --color-brand-gold: #c68e28;
 
     /* Sistema de Acentuação (Flux) */
     --color-accent: var(--color-zinc-800);
     --color-accent-content: var(--color-white);
     --color-accent-foreground: var(--color-zinc-800);
 
-    /* Animações reduzidas (Acessibilidade para quem tem vestibulopatia) */
+    /* Animações */
     --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     
     @keyframes fade-in {
@@ -43,7 +43,8 @@
 }
 
 @layer base {
-    *, ::after, ::before, ::backdrop, {
+    /* Correção: removida vírgula extra antes da chave */
+    *, ::after, ::before {
         border-color: var(--color-zinc-200);
     }
 
@@ -73,33 +74,27 @@
     }
 }
 
-/* --- CORREÇÃO DE VISIBILIDADE: LOGIN E REGISTRO --- */
+/* --- COMPONENTES E CORREÇÕES FLUX --- */
 
-/* --- CORREÇÃO FINAL E AGRESSIVA PARA O BOTÃO --- */
-
-/* Alvos: Botão primário do Flux e botões de submit */
+/* Botões: Primário e Submit */
 ui-button[variant="primary"],
 button[type="submit"],
 .flux-button-primary {
-    /* Força o fundo escuro da sua marca */
     background-color: var(--color-brand-dark) !important;
-    /* Força o texto em branco puro */
     color: #ffffff !important;
-    /* Garante que o texto não tenha transparência */
     opacity: 1 !important;
-    /* Melhora o peso da fonte para leitura */
     font-weight: 600 !important;
     position: relative;
 }
 
-/* O Flux muitas vezes coloca o texto dentro de um span ou slot, 
-   precisamos garantir que esse elemento interno também herde o branco */
+/* Garante que ícones ou textos internos nos botões sejam brancos */
 ui-button[variant="primary"] *,
 button[type="submit"] * {
+    color: #ffffff !important;
     opacity: 1 !important;
 }
 
-/* Ajuste do link Registrar (que estava invisível por ser branco no fundo claro) */
+/* Links de Registro e Flux Links */
 a[href*="register"], 
 .flux-link {
     color: var(--color-brand-gold) !important;
@@ -108,36 +103,34 @@ a[href*="register"],
     font-weight: 600 !important;
 }
 
-
-/* 3. Ajuste do Checkbox "Remember me" e sua label */
-[data-flux-checkbox] + label,
-[data-flux-label] {
-    opacity: 100% !important;
+/* Labels e Checkboxes */
+[data-flux-label],
+[data-flux-checkbox] + label {
+    opacity: 1 !important;
     color: var(--color-brand-dark) !important;
-    font-weight: var(--font-weight-medium);
+    font-weight: 500 !important; /* medium */
 }
 
-/* 4. Estilo do Checkbox quando marcado (Opcional - Dourado) */
+/* Checkbox quando marcado */
 input[type="checkbox"]:checked {
     background-color: var(--color-brand-gold) !important;
     border-color: var(--color-brand-gold) !important;
 }
 
+/* Espaçamento de campos */
 [data-flux-field]:not(ui-radio, ui-checkbox) {
     @apply grid gap-1.5;
 }
 
-[data-flux-label] {
-    @apply !mb-0 !text-sm font-medium opacity-90;
-}
-
+/* Inputs, Textareas e Selects ao focar */
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
-    @apply outline-hidden ring-2 ring-brand-gold/50 border-brand-gold;
+    @apply outline-none ring-2 ring-brand-gold/50 border-brand-gold;
 }
 
-/* Utilidades */
+/* --- UTILITÁRIOS --- */
+
 @utility font-serif-title {
     font-family: var(--font-serif-title);
 }
@@ -145,4 +138,20 @@ select:focus[data-flux-control] {
 @utility bg-mesh-subtle {
     background-image: radial-gradient(at 0% 0%, hsla(38, 30%, 96%, 1) 0, transparent 50%),
                       radial-gradient(at 100% 100%, hsla(38, 20%, 94%, 1) 0, transparent 50%);
+}
+
+/* Utilitário para forçar o dourado em componentes específicos */
+@utility bg-brand-gold-forced {
+    background-color: var(--color-brand-gold) !important;
+    color: white !important;
+}
+
+/* Animação de entrada para trocas de etapa no formulário */
+@utility animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
