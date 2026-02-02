@@ -4,6 +4,7 @@
 <head>
     @include('partials.head')
     <title>{{ $title ?? config('app.name') }}</title>
+    @fluxAppearance
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-900 antialiased">
@@ -85,7 +86,6 @@
     <main>
         {{ $slot }}
     </main>
-
     @fluxScripts
 </body>
 

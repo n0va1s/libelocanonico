@@ -129,14 +129,14 @@ new #[Layout('layouts.public')] class extends Component {
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 font-serif-title relative z-10">Identificou
                     algum vício no seu casamento?</h2>
                 <p class="text-zinc-400 mb-10 max-w-2xl mx-auto relative z-10">
-                    Faça nossa simulação gratuita para avaliar a viabilidade do seu caso ou inicie a preparação do seu
+                    Faça nossa avaliação gratuita para o diagnóstico do seu caso ou inicie a preparação do seu
                     libelo.
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                    <a href="{{ route('viabilidade') }}"
+                    <a href="{{ route('diagnostico') }}"
                         class="w-full sm:w-auto px-8 py-4 bg-[#c68e28] text-brand-dark rounded-2xl font-bold transition-all hover:bg-[#b37f24] active:scale-95">
-                        Fazer Simulação
+                        Fazer Diagnóstico
                     </a>
                     <a href="{{ route('dashboard') }}"
                         class="w-full sm:w-auto px-8 py-4 bg-white/10 text-white border border-white/20 rounded-2xl font-bold transition-all hover:bg-white/20">

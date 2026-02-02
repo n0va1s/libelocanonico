@@ -3,7 +3,7 @@
 use Livewire\Volt\Component;
 use Livewire\Attributes\Layout;
 
-new #[Layout('layouts.public')] class extends Component {
+new class extends Component {
     public string $status;
     public string $titulo;
 
@@ -66,12 +66,11 @@ new #[Layout('layouts.public')] class extends Component {
 
             {{-- CTAs (Chamadas para Ação) --}}
             <div class="grid gap-4 sm:flex sm:justify-center">
-
-                <flux:button href="{{ route('libelo.form') }}" variant="primary">
+                <flux:button href="{{ route('libelo.form') }}" variant="primary" class="!text-brand-dark">
                     Iniciar Meu Libelo
                 </flux:button>
-                <flux:button href="{{ route('viabilidade') }}" variant="primary">
-                    Refazer Meu Teste
+                <flux:button href="{{ route('diagnostico') }}" variant="outline">
+                    Refazer Meu Diagnóstico
                 </flux:button>
             </div>
 

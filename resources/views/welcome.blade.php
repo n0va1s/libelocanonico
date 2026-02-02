@@ -5,11 +5,6 @@
             rel="stylesheet" />
     @endpush
 
-    {{-- Alerta de Sessão --}}
-    <div class="pt-4 px-4 w-full">
-        <x-session-alert />
-    </div>
-
     {{-- HERO SECTION --}}
     <section class="relative pt-10 pb-20 md:pt-16 md:pb-28 bg-brand overflow-hidden">
         <div class="absolute inset-0 pointer-events-none opacity-50 md:opacity-100">
@@ -47,7 +42,7 @@
                 <div class="flex flex-col md:flex-row items-center justify-center gap-4 px-4 md:px-0">
                     <a href="#simulacao"
                         class="group flex items-center justify-center gap-3 px-10 py-5 bg-[#c68e28] text-brand-dark rounded-2xl font-bold text-lg hover:bg-[#b37f24] transition-all shadow-lg w-full md:w-auto">
-                        Faça Seu Simulado
+                        Faça Sua Verificação
                         <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -80,7 +75,7 @@
                     $steps = [
                         [
                             'num' => '01',
-                            'title' => 'Simulação',
+                            'title' => 'Verificação',
                             'desc' => 'Responda 12 perguntas baseadas nos vícios de consentimento.',
                         ],
                         [
@@ -119,25 +114,21 @@
     <section id="simulacao" class="py-16 bg-brand-bg">
         <div class="container mx-auto px-6">
             <div class="text-center mb-8 animate-fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark font-serif-title">Faça seu Simulado</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark font-serif-title">Faça sua Verificação</h2>
             </div>
 
             <div class="max-w-3xl mx-auto">
-                <div class="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-lg border border-zinc-100">
-                    <form action="#" class="space-y-6" onsubmit="return false;">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" placeholder="Nome Completo"
-                                class="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:border-[#c68e28] outline-none transition-all text-base">
-                            <input type="tel" placeholder="WhatsApp"
-                                class="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:border-[#c68e28] outline-none transition-all text-base">
-                        </div>
-                        <input type="email" placeholder="E-mail"
-                            class="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:border-[#c68e28] outline-none transition-all text-base">
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-zinc-100 text-center">
+                    @auth
+                        {{-- Usuário Logado: Encaminha para o Libelo/Simulado --}}
+                        <h3 class="text-2xl font-bold text-brand-dark font-serif-title mb-4">Bem-vindo de volta!</h3>
+                        <p class="text-zinc-500 mb-8">Você já está conectado. Pronto para continuar sua verificação de
+                            nulidade?</p>
 
-                        <a href="{{ route('viabilidade') }}" wire:navigate
+                        <a href="{{ route('diagnostico') }}" wire:navigate
                             class="group w-full flex items-center justify-center gap-3 px-10 py-5 bg-[#c68e28] text-brand-dark rounded-2xl font-bold text-lg hover:bg-[#b37f24] transition-all shadow-lg">
                             <span class="flex items-center gap-3">
-                                Responder Perguntas
+                                Acessar Meu Diagnóstico
                                 <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -145,13 +136,32 @@
                                 </svg>
                             </span>
                         </a>
-                    </form>
+                    @else
+                        <p class="text-zinc-500 mb-8">Para garantir o sigilo canônico e salvar seu progresso, é necessário
+                            criar uma conta ou fazer login.</p>
+
+                        <div class="flex flex-col gap-4">
+                            <a href="{{ route('register') }}" wire:navigate
+                                class="group flex items-center justify-center gap-3 px-10 py-5 bg-[#1b1b1b] text-[#c68e28] no-underline rounded-2xl font-bold text-lg hover:bg-black transition-all shadow-lg w-full md:w-auto">
+                                <span>Criar Conta Gratuita</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                            </a>
+                            <a href="{{ route('login') }}" wire:navigate
+                                class="text-[#c68e28] font-bold hover:underline py-2 transition-all">
+                                Já tenho uma conta (Fazer Login)
+                            </a>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- GRUPOS DE APOIO (Call to Action) --}}
+    {{-- GRUPOS DE APOIO --}}
     <section class="py-16 bg-white border-y border-zinc-100 relative overflow-hidden">
         {{-- Elemento Decorativo Sutil --}}
         <div

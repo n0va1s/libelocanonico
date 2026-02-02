@@ -1,6 +1,5 @@
 <x-layouts::public :title="'Você está Offline - Libelo Canônico'">
     <div class="min-h-[60vh] flex flex-col items-center justify-center text-center px-6">
-        {{-- Logo em SVG direto aqui para não depender de carregar imagem --}}
         <div class="mb-8">
             <x-app-logo-icon class="size-20" />
         </div>

@@ -18,10 +18,9 @@
     --color-brand-dark: #1b1b1b;
     --color-brand-gold: #c68e28;
 
-    /* Sistema de Acentuação (Flux) */
-    --color-accent: var(--color-zinc-800);
-    --color-accent-content: var(--color-white);
-    --color-accent-foreground: var(--color-zinc-800);
+    --color-accent: var(--color-brand-gold);
+    --color-accent-content: #1b1b1b;
+    --color-accent-foreground: var(--color-brand-gold);
 
     /* Animações */
     --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -72,26 +71,6 @@
     :focus-visible {
         @apply outline-2 outline-offset-2 outline-brand-gold;
     }
-}
-
-/* --- COMPONENTES E CORREÇÕES FLUX --- */
-
-/* Botões: Primário e Submit */
-ui-button[variant="primary"],
-button[type="submit"],
-.flux-button-primary {
-    background-color: var(--color-brand-dark) !important;
-    color: #ffffff !important;
-    opacity: 1 !important;
-    font-weight: 600 !important;
-    position: relative;
-}
-
-/* Garante que ícones ou textos internos nos botões sejam brancos */
-ui-button[variant="primary"] *,
-button[type="submit"] * {
-    color: #ffffff !important;
-    opacity: 1 !important;
 }
 
 /* Links de Registro e Flux Links */

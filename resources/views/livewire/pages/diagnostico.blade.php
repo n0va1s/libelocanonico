@@ -3,7 +3,7 @@
 use Livewire\Volt\Component;
 use Livewire\Attributes\Layout;
 
-new #[Layout('layouts.public')] class extends Component {
+new class extends Component {
     public int $step = 1;
     public array $answers = [];
     public bool $isFinished = false;
@@ -51,8 +51,7 @@ new #[Layout('layouts.public')] class extends Component {
         {{-- Barra de Progresso --}}
         <div class="mb-10">
             <div class="flex justify-between items-end mb-2">
-                <span class="text-xs font-bold text-[#c68e28] uppercase tracking-widest">Questionário de
-                    Viabilidade</span>
+                <span class="text-xs font-bold text-[#c68e28] uppercase tracking-widest">Diagnóstico</span>
                 <span class="text-sm font-bold text-zinc-400">{{ $step }}/12</span>
             </div>
             <div class="w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden">
